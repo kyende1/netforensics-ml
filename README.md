@@ -99,8 +99,7 @@ SIEM / IDS Alert Export
     - Splunk
     - Wazuh
     - Other SOC tools
-
-    Each alert includes:
+Each alert includes:
     - Timestamp
     - Classification result
     - Confidence score
