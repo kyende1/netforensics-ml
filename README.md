@@ -56,7 +56,7 @@ The solution follows a two-layer pipeline.
 - ├── models_iscx2016/
 - ├── requirements.txt
 - └── README.md
-> Large datasets are not included due to size limits.
+Large datasets are not included due to size limits.
 
 ## Requirements
 Python 3.9+
@@ -83,9 +83,8 @@ Outputs saved to:
 
 ## Datasets
 - CICIDS2017  
-- ISCXVPN2016  
-
-> Publicly available and referenced in report.
+- ISCXVPN2016
+Publicly available and referenced in report.
 
 ## SIEM Integration
 Exports JSONL alerts compatible with:
@@ -118,5 +117,6 @@ Each alert includes:
 
 ## Documentation
 Full methodology and evaluation are discussed in the academic report.
+
 
 
