@@ -56,16 +56,20 @@ The solution follows a two-layer pipeline.
 - ├── models_iscx2016/
 - ├── requirements.txt
 - └── README.md
+
 Large datasets are not included due to size limits.
 
 ## Requirements
 Python 3.9+
 Install dependencies:
+
 pip install -r requirements.txt
+
 If XGBoost fails: pip install xgboost
 
 ## Running the Dashboard
 streamlit run app.py
+
 Open: http://localhost:8501
 
 ## Dashboard Capabilities
@@ -117,6 +121,7 @@ Each alert includes:
 
 ## Documentation
 Full methodology and evaluation are discussed in the academic report.
+
 
 
 
