@@ -7,7 +7,7 @@
 ## Project Overview
 This project implements a privacy-preserving supervised machine learning system for detecting malicious network flows using encrypted traffic metadata only, without Deep Packet Inspection. The system was developed in three iterative phases:
 
-### Phase 1
+### Phase 1: 
 Data preprocessing and feature engineering framework
 
 ### Phase 2
@@ -118,4 +118,5 @@ Each alert includes:
 
 ## Documentation
 Full methodology and evaluation are discussed in the academic report.
+
 
