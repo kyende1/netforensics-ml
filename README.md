@@ -1,129 +1,71 @@
-# Supervised Detection of Malicious Flows from Encrypted Traffic Metadata
-
-**Author:** Thomas Kyende  
-**Matriculation Number:** 321146438  
-**Institution:** IU International University of Applied Sciences  
-
-## Project Overview
-This project implements a privacy-preserving supervised machine learning system for detecting malicious network flows using encrypted traffic metadata only, without Deep Packet Inspection. The system was developed in three iterative phases:
-
-### Phase 1: 
-Data preprocessing and feature engineering framework
-
-### Phase 2
-Supervised ML modelling, evaluation and dashboard implementation
-
-### Phase 3
-Operational maturity enhancements:
-- Added XGBoost model  
-- Added live traffic simulation / real-time inference capability  
-- Added SIEM-compatible JSONL alert export  
-
-## Key Features
-- Privacy-preserving classification  
-- Models: Random Forest, SGDClassifier (Linear SVM), and XGBoost  
-- Cross-dataset generalisation (CICIDS2017 → ISCXVPN2016)  
-- Interactive Streamlit dashboard  
-- Live traffic simulation  
-- SIEM / IDS alert export (JSONL)  
-- Modular training & evaluation scripts  
-
-## System Architecture
-The solution follows a two-layer pipeline.
-
-### 1 Training Layer
-- Data ingestion  
-- Cleaning & preprocessing  
-- Model training  
-- Cross-dataset validation  
-- Model persistence (joblib)
-
-### 2 Deployment Layer
-- Loads trained models  
-- Runs inference  
-- Live simulation  
-- Alert export  
-- Dashboard interaction
-  
-## Project Structure
-- ├── app.py
-- ├── train_cicids.py
-- ├── convert_arff.py
-- ├── convert_arff_to_iscx_csv.py
-- ├── tools/
-- ├── assets/
-- ├── models_cicids2017/
-- ├── models_iscx2016/
-- ├── requirements.txt
-- └── README.md
-
-Large datasets are not included due to size limits.
+(Note: I didn't include trained models in the submission—they get generated when you run the training script. Same for large datasets.)
 
 ## Requirements
-Python 3.9+
-Install dependencies:
-
-pip install -r requirements.txt
-
-If XGBoost fails: pip install xgboost
+- Python 3.9 or higher  
+- Install packages with: `pip install -r requirements.txt`  
+- If XGBoost gives trouble (it did on my machine once), try `pip install xgboost` separately.  
 
 ## Running the Dashboard
-streamlit run app.py
+Just run: `streamlit run app.py`  
+It'll open in your browser (usually at http://localhost:8501).  
 
-Open: http://localhost:8501
+From there, you can:  
+- Pick a dataset and model.  
+- See performance metrics on test data.  
+- Compare models (especially with XGBoost now).  
+- Simulate traffic flows and export alerts.  
 
-## Dashboard Capabilities
-- Load trained models  
-- Evaluate test data  
-- Compare performance  
-- Simulate live traffic  
-- Export SIEM alerts in JSONL
+## Model Training
+To train models yourself: `python train_cicids.py`  
+Add `--train-iscx` if you want to include ISCX too.  
+Use `--fast` for quicker runs (smaller grids, sampling).  
 
-## Training Models
-python train_cicids.py
-Outputs saved to:
-- models_cicids2017/
-- models_iscx2016/
+This will:  
+- Load the datasets (assuming they're in the right folders).  
+- Train RF, SGD, and XGBoost.  
+- Save models to the models_ folders.  
+- Create reports with metrics.  
 
 ## Datasets
-- CICIDS2017  
-- ISCXVPN2016
+Uses:  
+- CICIDS2017 (main one).  
+- ISCXVPN2016 (for validation).  
 
-Publicly available and referenced in report.
+Datasets aren't in the ZIP because they're huge—download them from the sources mentioned in the report. Once downloaded, put them in cicids2017_raw/ and iscx2016_raw/. The converters handle ARFF to CSV if needed.
 
-## SIEM Integration
-Exports JSONL alerts compatible with:
+## SIEM / IDS Alert Export
+In the dashboard's simulation tab, it generates alerts and exports them as JSONL. This format works with tools like:  
 - Elastic SIEM  
 - Splunk  
 - Wazuh  
 
-Each alert includes:
+Each alert has:  
 - Timestamp  
-- Classification result  
-- Confidence score  
-- Flow attributes  
+- Prediction (malicious or not)  
+- Score/confidence  
+- Some flow details  
+
+I added this in Phase 3 to show how it could integrate into real systems.
 
 ## Evaluation Summary
-- Strong performance
-- Cross-dataset robustness
-- Live validation successful
-- Deployment feasible
-  
-## Ethics & Privacy
-- No packet payload inspection  
-- Metadata only  
-- Privacy-preserving approach  
+Detailed in the report, but quick highlights:  
+- Models perform well (high F1/AUC).  
+- Cross-dataset works okay, shows robustness.  
+- Simulation tests dynamic stuff successfully.  
+- Overall, it's feasible for real use.  
+
+## Ethical & Privacy Considerations
+Important: This doesn't look at packet contents, just metadata. So it keeps user privacy intact while still detecting threats. I made sure to follow ethical guidelines in the design.
 
 ## Future Work
-- Kafka / Spark streaming  
-- Cloud deployment  
-- Model retraining automation  
-- Lightweight deep learning  
+Some ideas for next steps:  
+- Add real-time streaming with Kafka or something.  
+- Deploy to cloud for scalability.  
+- Auto-retrain if data drifts.  
+- Maybe try lightweight neural nets.  
 
 ## Documentation
-Full methodology and evaluation are discussed in the academic report.
+Everything's explained in the academic report submitted with this. It covers methodology, results, and how it all ties together.
 
-
-
-
-
+## Final Note
+This was a fun project—started with basic analysis and built up to something deployable. It balances tech, ethics, and practicality for cybersecurity.
